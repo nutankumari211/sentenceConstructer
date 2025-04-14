@@ -21,6 +21,7 @@ A fun and interactive web application where users build grammatically correct se
 ## Folder Structure
 
 src/
+
 ├── assets/              # Static images and icons
 
 ├── components/          # Reusable UI components (Button)
@@ -61,10 +62,12 @@ npm install
 
 # Start the app
 npm run dev
+
+# run json server parallely
+json-server --watch src/lib/QNA.json --port 3000
 ```
 
-#run json server parallely
-json-server --watch src/lib/QNA.json --port 3000
+
 
 
 ---
