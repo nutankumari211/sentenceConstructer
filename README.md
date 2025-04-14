@@ -1,54 +1,71 @@
-# React + TypeScript + Vite
+# Sentence Construction Game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fun and interactive web application where users build grammatically correct sentences from jumbled words. Built with React, TypeScript, Framer Motion, and Redux Toolkit.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- Random sentence construction game
+- Timer-based gameplay (30s/question)
+- Score out of 10 shown in a circular progress chart
+- Detailed feedback for each response
+- Smooth animations via Framer Motion
+- State management with Redux Toolkit
+- Responsive UI using Tailwind CSS
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Folder Structure
+
+src/
+├── assets/              # Static images and icons
+├── components/          # Reusable UI components (Button)
+├── pages/               # Page-level components (LandingPage, FeedbackScreen, etc.)
+├── store/               # Redux store and slices
+├── lib/                 # Helper libraries
+└── App.tsx              # Main application entry
+
+
+---
+
+## Tech Stack
+
+- Frontend: React + TypeScript
+- Styling: Tailwind CSS
+- Animations: Framer Motion
+- State Management: Redux Toolkit
+- Routing: React Router
+
+---
+
+## Installation
+
+```
+# Clone the repository
+git clone https://github.com/your-username/sentence-construction-game.git
+
+# Navigate to the project directory
+cd sentence-construction-game
+
+# Install dependencies
+npm install
+
+# Start the app
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+#run json server parallely
+json-server --watch src/lib/QNA.json --port 3000
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+---
+
+## Game Flow
+
+1. Landing Page: Overview of game rules and option to start.
+2. Game Screen: Sentence construction with 30s timer.
+3. Feedback Screen: Detailed score (out of 10) and review of each question.
+
+---
+
