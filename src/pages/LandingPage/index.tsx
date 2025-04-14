@@ -7,16 +7,18 @@ import { useNavigate } from "react-router-dom";
 const LandingPage: React.FC<{ onStartGame: () => void }> = ({ onStartGame }) => {
   const navigate = useNavigate();
 
-  const sentenceVariants = {
-    hidden: { opacity: 0 },
-    visible: {
+  const letterVariants = {
+    hidden: { color: "#000", opacity: 0 },
+    visible: (i: number) => ({
+      color: ["#3357FF"],
       opacity: 1,
       transition: {
-        duration: 0.5,
+        delay: i * 0.2,
+        duration: 2,
         repeat: Infinity,
         repeatType: "reverse" as const,
       },
-    },
+    }),
   };
 
   const handleStartGame = () => {
@@ -41,21 +43,26 @@ const LandingPage: React.FC<{ onStartGame: () => void }> = ({ onStartGame }) => 
         </div>
 
         <div className="text-5xl font-semibold text-gray-600 mb-2 text-center sm:text-4xl md:text-5xl">
-          <motion.span
-            variants={sentenceVariants}
-            initial="hidden"
-            animate="visible"
-            className="inline-block underline decoration-black-200 decoration-4 text-black"
-          >
-            Sentence
-          </motion.span>{" "}
-          <span>Construction</span>
+          {"Sentence".split("").map((letter, index) => (
+            <motion.span
+              key={index}
+              custom={index}
+              variants={letterVariants}
+              initial="hidden"
+              animate="visible"
+              className="inline-block underline decoration-black decoration-4 text-black"
+            >
+              {letter}
+            </motion.span>
+          ))}
+          <span> Construction</span>
         </div>
 
         <p className="text-gray-600 text-center mb-6 text-sm sm:text-base">
           Users have to construct a sentence with random words by placing them in the correct order.
         </p>
 
+        {/* Game Info Section */}
         <div className="flex flex-wrap justify-center gap-8 mb-6">
           <div className="text-center flex-shrink-0">
             <p className="text-xl">Time Per Question</p>
@@ -80,6 +87,7 @@ const LandingPage: React.FC<{ onStartGame: () => void }> = ({ onStartGame }) => 
           </div>
         </div>
 
+        {/* Buttons */}
         <div className="flex flex-wrap gap-6 mt-8 justify-center">
           <Button className="px-7 py-6 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition cursor-pointer">
             Back

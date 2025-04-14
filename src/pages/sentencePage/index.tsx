@@ -19,14 +19,18 @@ const SentencePage: React.FC = () => {
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showQuitModal, setShowQuitModal] = useState(false);
-  const [selectedAnswers, setSelectedAnswers] = useState<(string | null)[]>(Array(questions[0]?.correctAnswer.length).fill(null));
+  const [selectedAnswers, setSelectedAnswers] = useState<(string | null)[]>(
+    Array(questions[0]?.correctAnswer.length).fill(null)
+  );
   const [timeLeft, setTimeLeft] = useState(30);
-  const [userResponses, setUserResponses] = useState<{
-    userAnswer: string[];
-    correctAnswer: string[];
-    questionId: string;
-    question: string;
-  }[]>([]);
+  const [userResponses, setUserResponses] = useState<
+    {
+      userAnswer: string[];
+      correctAnswer: string[];
+      questionId: string;
+      question: string;
+    }[]
+  >([]);
 
   const currentQuestion = questions[currentQuestionIndex];
 
@@ -41,20 +45,35 @@ const SentencePage: React.FC = () => {
 
     if (currentQuestionIndex + 1 < questions.length) {
       setCurrentQuestionIndex((prev) => prev + 1);
-      setSelectedAnswers(Array(questions[currentQuestionIndex + 1]?.correctAnswer.length).fill(null));
+      setSelectedAnswers(
+        Array(questions[currentQuestionIndex + 1]?.correctAnswer.length).fill(
+          null
+        )
+      );
       setTimeLeft(30);
     } else {
       const results = [...userResponses, currentResponse].map((response) => ({
         ...response,
-        isCorrect: JSON.stringify(response.correctAnswer) === JSON.stringify(response.userAnswer),
+        isCorrect:
+          JSON.stringify(response.correctAnswer) ===
+          JSON.stringify(response.userAnswer),
       }));
 
       dispatch(setResults(results));
       setTimeout(() => {
-        dispatch(setScreen("feedback")); 
+        dispatch(setScreen("feedback"));
         navigate("/feedback");
-      }, 100);    }
-  }, [selectedAnswers, currentQuestion, currentQuestionIndex, questions, userResponses, dispatch, navigate]);
+      }, 100);
+    }
+  }, [
+    selectedAnswers,
+    currentQuestion,
+    currentQuestionIndex,
+    questions,
+    userResponses,
+    dispatch,
+    navigate,
+  ]);
 
   useEffect(() => {
     const timer = setInterval(() => setTimeLeft((prev) => prev - 1), 1000);
@@ -77,6 +96,12 @@ const SentencePage: React.FC = () => {
     setSelectedAnswers(updated);
   };
 
+  const handleQuitConfirm = () => {
+    setShowQuitModal(false);
+    dispatch(setScreen("landing"));
+    navigate("/");
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-md p-6 sm:p-8 w-full max-w-3xl relative">
@@ -95,10 +120,13 @@ const SentencePage: React.FC = () => {
         <QuitModal
           isOpen={showQuitModal}
           onClose={() => setShowQuitModal(false)}
-          onConfirm={() => window.location.reload()}
+          onConfirm={handleQuitConfirm}
         />
 
-        <ProgressBar total={questions.length} currentIndex={currentQuestionIndex} />
+        <ProgressBar
+          total={questions.length}
+          currentIndex={currentQuestionIndex}
+        />
 
         <p className="text-center text-gray-500 text-sm mb-6">
           Select the missing words in the correct order
