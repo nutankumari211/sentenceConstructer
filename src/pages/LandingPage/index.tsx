@@ -34,7 +34,7 @@ const LandingPage: React.FC<{ onStartGame: () => void }> = ({ onStartGame }) => 
       <div className="pt-3 items-center flex flex-col justify-center px-4 sm:px-6 md:px-10">
         <div className="mb-16 pt-10">
           <img
-            src="src/assets/edit-property-512.png"
+            src="/assets/edit-property-512.png"
             alt="logo"
             className="h-20 w-20 mx-auto"
           />
@@ -70,7 +70,7 @@ const LandingPage: React.FC<{ onStartGame: () => void }> = ({ onStartGame }) => 
           <div className="text-center flex-shrink-0">
             <div className="flex justify-center items-center mb-2">
               <img
-                src="src/assets/icons8-coin.gif"
+                src="/assets/icons8-coin.gif"
                 alt="coin"
                 className="h-7 w-7"
               />
