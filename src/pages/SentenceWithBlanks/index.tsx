@@ -7,11 +7,11 @@ const SentenceWithBlanks: React.FC<SentenceWithBlanksProps> = ({
   selectedAnswers,
   onUnselectAnswer,
 }) => {
-  const parts = question.split("_____________");
+  const parts = question?.split("_____________");
 
   return (
     <div className="flex flex-wrap justify-center gap-y-3 text-base sm:text-lg font-medium leading-relaxed">
-      {parts.map((part, index) => (
+      {parts?.map((part, index) => (
         <React.Fragment key={index}>
           <span className="mx-1">{part}</span>
           {index < correctAnswerLength &&

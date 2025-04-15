@@ -10,11 +10,11 @@ const OptionButtons: React.FC<OptionButtonsProps> = ({
 }) => {
   return (
     <div className="flex flex-wrap justify-center gap-3 mb-6">
-      {options.map((option, index) => (
+      {options?.map((option, index) => (
         <Button
           key={index}
           onClick={() => onSelect(option)}
-          disabled={selectedAnswers.includes(option)}
+          disabled={selectedAnswers?.includes(option)}
           className={`px-4 py-2 rounded-full border text-sm ${
             selectedAnswers.includes(option)
               ? "bg-gray-200 text-gray-600 cursor-not-allowed"

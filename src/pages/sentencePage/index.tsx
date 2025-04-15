@@ -16,12 +16,12 @@ const SentencePage: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const questions = useSelector((state: RootState) => state.app.questions);
+  console.log("questions", questions);
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showQuitModal, setShowQuitModal] = useState(false);
-  const [selectedAnswers, setSelectedAnswers] = useState<(string | null)[]>(
-    Array(questions[0]?.correctAnswer.length).fill(null)
-  );
+  const [selectedAnswers, setSelectedAnswers] = useState<(string | null)[]>([]);
+
   const [timeLeft, setTimeLeft] = useState(30);
   const [userResponses, setUserResponses] = useState<
     {
@@ -32,7 +32,16 @@ const SentencePage: React.FC = () => {
     }[]
   >([]);
 
-  const currentQuestion = questions[currentQuestionIndex];
+  
+
+
+  useEffect(() => {
+    if (questions?.length > 0) {
+      setSelectedAnswers(Array(questions[0].correctAnswer.length).fill(null));
+    }
+  }, [questions]);
+  
+  const currentQuestion = questions?.[currentQuestionIndex];
 
   const handleNext = useCallback(() => {
     const currentResponse = {
@@ -43,7 +52,7 @@ const SentencePage: React.FC = () => {
     };
     setUserResponses((prev) => [...prev, currentResponse]);
 
-    if (currentQuestionIndex + 1 < questions.length) {
+    if (currentQuestionIndex + 1 < questions?.length) {
       setCurrentQuestionIndex((prev) => prev + 1);
       setSelectedAnswers(
         Array(questions[currentQuestionIndex + 1]?.correctAnswer.length).fill(
@@ -102,6 +111,7 @@ const SentencePage: React.FC = () => {
     navigate("/");
   };
 
+
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-md p-6 sm:p-8 w-full max-w-3xl relative">
@@ -124,7 +134,7 @@ const SentencePage: React.FC = () => {
         />
 
         <ProgressBar
-          total={questions.length}
+          total={questions?.length}
           currentIndex={currentQuestionIndex}
         />
 
@@ -134,15 +144,15 @@ const SentencePage: React.FC = () => {
 
         <div className="text-center text-black leading-relaxed mb-6">
           <SentenceWithBlanks
-            question={currentQuestion.question}
-            correctAnswerLength={currentQuestion.correctAnswer.length}
+            question={currentQuestion?.question}
+            correctAnswerLength={currentQuestion?.correctAnswer.length}
             selectedAnswers={selectedAnswers}
             onUnselectAnswer={handleUnselectAnswer}
           />
         </div>
 
         <OptionButtons
-          options={currentQuestion.options}
+          options={currentQuestion?.options}
           selectedAnswers={selectedAnswers}
           onSelect={handleSelectAnswer}
         />

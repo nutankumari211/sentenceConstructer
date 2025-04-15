@@ -13,9 +13,9 @@ export const Routing = () => {
   // Start Game API call and state management
   const startGame = async () => {
     try {
-      const response = await fetch("http://localhost:3000/data");
+      const response = await fetch("https://raw.githubusercontent.com/nutankumari211/jsonData/refs/heads/main/QNA.json");
       const data = await response.json();
-      dispatch(setQuestions(data.questions));
+      dispatch(setQuestions(data.data.questions));
       dispatch(setScreen("game"));
     } catch (error) {
       console.error("Error fetching questions:", error);
