@@ -16,7 +16,6 @@ const SentencePage: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const questions = useSelector((state: RootState) => state.app.questions);
-  console.log("questions", questions);
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showQuitModal, setShowQuitModal] = useState(false);
