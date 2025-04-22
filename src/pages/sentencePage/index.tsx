@@ -150,7 +150,7 @@ const SentencePage: React.FC = () => {
           />
         </div>
 
-        <div classname="mt-2>
+        <div classname="mt-2">
            <OptionButtons
           options={currentQuestion?.options}
           selectedAnswers={selectedAnswers}
