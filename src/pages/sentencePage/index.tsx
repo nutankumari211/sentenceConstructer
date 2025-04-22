@@ -16,6 +16,7 @@ const SentencePage: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const questions = useSelector((state: RootState) => state.app.questions);
+  console.log("questions", questions);
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showQuitModal, setShowQuitModal] = useState(false);
@@ -31,15 +32,12 @@ const SentencePage: React.FC = () => {
     }[]
   >([]);
 
-  
-
-
   useEffect(() => {
     if (questions?.length > 0) {
       setSelectedAnswers(Array(questions[0].correctAnswer.length).fill(null));
     }
   }, [questions]);
-  
+
   const currentQuestion = questions?.[currentQuestionIndex];
 
   const handleNext = useCallback(() => {
@@ -110,7 +108,6 @@ const SentencePage: React.FC = () => {
     navigate("/");
   };
 
-
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-md p-6 sm:p-8 w-full max-w-3xl relative">
@@ -141,7 +138,7 @@ const SentencePage: React.FC = () => {
           Select the missing words in the correct order
         </p>
 
-        <div className="text-center text-black leading-relaxed mb-6 h-[100px]">
+        <div className="text-center text-black leading-relaxed mb-6 min-h-[100px] flex items-center justify-center">
           <SentenceWithBlanks
             question={currentQuestion?.question}
             correctAnswerLength={currentQuestion?.correctAnswer.length}
@@ -150,15 +147,13 @@ const SentencePage: React.FC = () => {
           />
         </div>
 
-       <div className="mt-2">
-            <OptionButtons
-              options={currentQuestion?.options}
-              selectedAnswers={selectedAnswers}
-              onSelect={handleSelectAnswer}
-            />
-          </div>
-       
-
+        <div className="mt-15 mb-2">
+          <OptionButtons
+            options={currentQuestion?.options}
+            selectedAnswers={selectedAnswers}
+            onSelect={handleSelectAnswer}
+          />
+        </div>
         <div className="flex justify-end">
           <Button
             disabled={!selectedAnswers.every((ans) => ans !== null)}
