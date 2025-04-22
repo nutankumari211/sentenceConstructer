@@ -10,23 +10,26 @@ const SentenceWithBlanks: React.FC<SentenceWithBlanksProps> = ({
   const parts = question?.split("_____________");
 
   return (
-    <div className="flex flex-wrap justify-center gap-y-3 text-base sm:text-lg font-medium leading-relaxed">
+    <div className="text-center whitespace-pre-wrap">
       {parts?.map((part, index) => (
         <React.Fragment key={index}>
-          <span className="mx-1">{part}</span>
-          {index < correctAnswerLength &&
-            (selectedAnswers[index] ? (
-              <span
-                onClick={() => onUnselectAnswer(index)}
-                className="inline-block mx-1 px-3 py-1 bg-gray-200 text-black rounded-full cursor-pointer border"
-              >
-                {selectedAnswers[index]}
-              </span>
-            ) : (
-              <span className="inline-block mx-1 px-3 py-1 bg-gray-100 rounded-full border">
-                ____________
-              </span>
-            ))}
+          <span className="inline my-1">{part}</span>
+          {index < correctAnswerLength && (
+            <span className="inline-block mx-1">
+              {selectedAnswers[index] ? (
+                <span
+                  onClick={() => onUnselectAnswer(index)}
+                  className="inline-block px-3 py-1 bg-gray-200 text-black rounded-full cursor-pointer border"
+                >
+                  {selectedAnswers[index]}
+                </span>
+              ) : (
+                <span className="inline-block px-3 py-1 bg-gray-100 rounded-full border">
+                  _____________
+                </span>
+              )}
+            </span>
+          )}
         </React.Fragment>
       ))}
     </div>
