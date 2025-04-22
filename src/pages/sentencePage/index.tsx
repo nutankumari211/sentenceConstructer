@@ -141,7 +141,7 @@ const SentencePage: React.FC = () => {
           Select the missing words in the correct order
         </p>
 
-        <div className="text-center text-black leading-relaxed mb-6">
+        <div className="text-center text-black leading-relaxed mb-6 min-h-[100px]">
           <SentenceWithBlanks
             question={currentQuestion?.question}
             correctAnswerLength={currentQuestion?.correctAnswer.length}
